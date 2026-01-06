@@ -1,0 +1,19 @@
+Das Projekt implementiert einen einfachen selbst gehosteten REST-API-Server in C# unter Verwendung von System.Net.HttpListener. Es folgt einem klaren Schichtenmodell welches die Prinzipien der Dependency Inversion (DIP) und Single Responsibility (SRP) umsetzt.
+
+Architektur:
+1: Server/Routing Schicht (Router.cs, Program.cs): Empfängt die HTTP-Anfragen, setzt URL Routing um und kümmert sich um Fehlerbehandlung auf HTTP-Ebene (404, 500).
+2: Endpoint-Schicht (ApiEndpoints.cs): Enthält Businesslogik für die spezifischen API-Pfade (/users/login, /user/register)
+3: Service-Schicht (IAuthService, AuthService): Enthält Domainlogic (Passwort-Hashing, Token-Generierung). Das Passwordhashing ist noch in einem Mock/Demostate da es explizit nicht vorausgesetzt wurde.
+4: Data Access Layer (IMediaRepository, InMemoryMediaRepository): Verantwortlich für Speicherung und Abfrage der Daten. Die Verwendung des Interfaces entkoppelt die Logik von der Speicherung welche auch noch in Demo Status ist da noch keine Datenbankanbindung implementiert wurde.
+
+Nullability:
+Das größte Problem in dem Projekt machte mir der Umgang mit etwaigen null Werten in den User oder Mediendaten. Dies habe ich durch die Repository Methoden (z.b. GetUserByUsernameAsync) die optionale Werte liefern erreicht, welche explizit nullable Typen zurückgeben.
+Außerdem wird durch die Verwendung von required in den Data Transfer Objects sichergestellt dass die vom Client gesendeten Daten beim Deserialisieren nicht null sind und beseitigt Compilerwarnungen (2 null Warnungen sind leider immernoch vorhanden aber stören die Funktion nicht.
+
+//Update des Protokolls mit Endabgabe:
+Architektur: Persistenzschicht wurde von In-Memory auf PostgreSQL migriert, gehostet in einem Docker-Container.
+Technik: Verwendung von Npgsql als ADO.NET Provider für die direkte Kommunikation ohne ORM.
+Setup: Infrastruktur als Code mittels docker-compose.yml definiert.
+
+git link:
+https://github.com/4rtiist/MediaServer.git

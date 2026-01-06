@@ -23,11 +23,17 @@ namespace MediaServer.Server
             var request = context.Request;
             var response = context.Response;
 
+            if (request.Url == null)
+            {
+                await SendResponse(response, HttpStatusCode.BadRequest, new { error = "Invalid URL." });
+                return;
+            }
+
             string key = $"{request.HttpMethod.ToUpper()}:{request.Url.LocalPath.ToLower()}";
 
             Console.WriteLine($"Received request: {key}");
 
-            if (routes.TryGetValue(key, out RequestHandler handler))
+            if (routes.TryGetValue(key, out RequestHandler? handler) && handler is not null)
             {
                 try
                 {

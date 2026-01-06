@@ -10,9 +10,10 @@ namespace MediaServer.Models
     public class MediaEntry
     {
         public int Id { get; set; }
+        public int CreatorId { get; set; }
         public required string Title { get; set; }
-        public required MediaEntryType Type { get; set; }
         public required string Description { get; set; }
+        public required MediaEntryType Type { get; set; }
         public required string Genre { get; set; }
         public required int ReleaseYear { get; set; }
         public required int AgeRestriction { get; set; }

@@ -19,8 +19,33 @@ namespace MediaServer
 
         static async Task Main(string[] args)
         {
+            Console.WriteLine("--- SERVER START ---");
+
+            // 1. Repository erstellen
+            string connStr = "Host=localhost;Port=5432;Database=media_server_db;Username=admin;Password=testing";
+
+            IMediaRepository repository;
+            try
+            {
+                Console.WriteLine("Initialisiere Datenbank...");
+                repository = new PostgresMediaRepository(connStr);
+                Console.WriteLine("Datenbank erfolgreich verbunden.");
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"KRITISCHER FEHLER: Datenbank konnte nicht gestartet werden: {ex.Message}");
+                Console.ResetColor();
+                return;
+            }
+
+            // 2. Repository an die Endpoints übergeben
+            ApiEndpoints.Configure(repository);
+
+            // 3. Endpunkte registrieren
             ApiEndpoints.RegisterEndpoints(router);
 
+            // 4. Server starten
             listener = new HttpListener();
             listener.Prefixes.Add(URL);
 
