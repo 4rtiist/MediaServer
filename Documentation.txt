@@ -14,6 +14,45 @@ Außerdem wird durch die Verwendung von required in den Data Transfer Objects si
 Architektur: Persistenzschicht wurde von In-Memory auf PostgreSQL migriert, gehostet in einem Docker-Container.
 Technik: Verwendung von Npgsql als ADO.NET Provider für die direkte Kommunikation ohne ORM.
 Setup: Infrastruktur als Code mittels docker-compose.yml definiert.
+Dependency Injection: Ich erstelle in dieser Version das Repository direkt in Program.cs da sonst die Just in Time Kompilierung von C# Probleme macht wenn vorher auf das Repo zugegriffen werden sollte.
+
+Test Abdeckung & Unit Tests:
+Business Logic (RecommendationService): Dies ist der komplexeste Teil der App. Getestet wurden:
+Erkennung des Lieblingsgenres basierend auf Ratings.
+Korrekte Filterung (keine Empfehlung von Filmen, die der User schon kennt).
+Funktionieren der Fallback-Mechanismen (wenn User keine Historie hat oder Genre-Suche leer ist).
+Verhalten bei Datenbankfehlern (Exception Handling).
+
+Security Logic (AuthService):
+Verifizierung, dass Passwörter nicht im Klartext, sondern als Hash verarbeitet werden.
+Generierung und Validierung von Session-Tokens.
+
+Data Models:
+Prüfung von Default-Werten (z. B. IsConfirmed = false bei neuen Ratings mit Kommentar).
+Validierung der DTO-Initialisierung. 
+
+2 SOLID Prinzipien:
+Dependency Inversion (DIP):
+Der RecommendationService (High-Level Logik) greift niemals direkt auf die Klasse PostgresMediaRepository (Low-Level Datenbank-Zugriff) zu. Stattdessen hängt er nur vom Interface IMediaRepository ab.
+z.B.:
+// RecommendationService.cs
+public class RecommendationService
+{
+    private readonly IMediaRepository _repository; // Abhängigkeit vom Interface
+
+    // Die konkrete Implementierung wird "injiziert" (Dependency Injection)
+    public RecommendationService(IMediaRepository repository)
+    {
+        _repository = repository;
+    }
+}
+
+Single Responsibility Principle (SRP):
+Ich habe eine klare Trennung zwischen HTTP-Verarbeitung, Geschäftslogik und Datenzugriff vorgenommen.
+PostgresMediaRepository.cs: Ist nur für SQL-Befehle (INSERT, SELECT) und das Mapping von Datenbankzeilen auf C#-Objekte zuständig. Sie enthält keine Business-Regeln.
+AuthService.cs: Kümmert sich nur um Krypto-Aufgaben (Hashing, Token). Sie weiß nichts über HTTP oder SQL.
+ApiEndpoints.cs: Ist nur für das Parsen von HTTP-Requests und das Senden von Antworten zuständig. Sie enthält keine SQL-Queries.
+
 
 git link:
 https://github.com/4rtiist/MediaServer.git

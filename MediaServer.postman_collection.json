@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "334be7d9-eb25-4384-94a5-50c6713b7704",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49390141"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"TestUser2\",\r\n    \"Password\": \"1231\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"TestUser2\",\r\n    \"Password\": \"1231\",\r\n    \"Email\": \"pissen@kacken.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1 register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"CreatorUser\",\r\n    \"email\": \"creator@test.com\",\r\n    \"password\": \"securePass123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/users/register' \\\r\n--header 'Content-Type: application/json' \\\r\n--data '{\r\n    \"username\": \"CreatorUser\",\r\n    \"email\": \"creator@test.com\",\r\n    \"password\": \"securePass123\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "2 login für token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"CreatorUser\",\r\n    \"password\": \"securePass123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/users/login' \\\r\n--header 'Content-Type: application/json' \\\r\n--data '{\r\n    \"username\": \"CreatorUser\",\r\n    \"password\": \"securePass123\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "3 updateprofile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"CreatorUser\",\r\n    \"email\": \"newmail@test.com\",\r\n    \"newPassword\": \"newPassword123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				},
+				"description": "Generated from cURL: curl --location --request PUT 'http://localhost:8080/api/users/profile' \\\r\n--header 'Content-Type: application/json' \\\r\n--header 'Authorization: Bearer {{TOKEN}}' \\\r\n--data '{\r\n    \"username\": \"CreatorUser\",\r\n    \"email\": \"newmail@test.com\",\r\n    \"newPassword\": \"newPassword123\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "4 createmedia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Inception\",\r\n    \"description\": \"Dream theft\",\r\n    \"type\": 0,\r\n    \"genre\": \"SciFi\",\r\n    \"releaseYear\": 2010,\r\n    \"ageRestriction\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/media",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"media"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/media' \\\r\n--header 'Content-Type: application/json' \\\r\n--header 'Authorization: Bearer {{TOKEN}}' \\\r\n--data '{\r\n    \"title\": \"Inception\",\r\n    \"description\": \"Dream theft\",\r\n    \"type\": 0,\r\n    \"genre\": \"SciFi\",\r\n    \"releaseYear\": 2010,\r\n    \"ageRestriction\": 12\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "5 searchmovie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/media/search?genre=SciFi&minRating=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"media",
+						"search"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "SciFi"
+						},
+						{
+							"key": "minRating",
+							"value": "0"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/media/search?genre=SciFi&minRating=0'"
+			},
+			"response": []
+		},
+		{
+			"name": "6 update media",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 16,\r\n    \"title\": \"Inception (Remastered)\",\r\n    \"description\": \"Dream theft updated\",\r\n    \"type\": 0,\r\n    \"genre\": \"SciFi\",\r\n    \"releaseYear\": 2010,\r\n    \"ageRestriction\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/media",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"media"
+					]
+				},
+				"description": "Generated from cURL: curl --location --request PUT 'http://localhost:8080/api/media' \\\r\n--header 'Content-Type: application/json' \\\r\n--header 'Authorization: Bearer {{TOKEN}}' \\\r\n--data '{\r\n    \"id\": 1,\r\n    \"title\": \"Inception (Remastered)\",\r\n    \"description\": \"Dream theft updated\",\r\n    \"type\": 0,\r\n    \"genre\": \"SciFi\",\r\n    \"releaseYear\": 2010,\r\n    \"ageRestriction\": 12\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "7 rate media with comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mediaId\": 16,\r\n    \"score\": 5,\r\n    \"comment\": \"Amazing movie!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/ratings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ratings"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/ratings' \\\r\n--header 'Content-Type: application/json' \\\r\n--header 'Authorization: Bearer {{TOKEN}}' \\\r\n--data '{\r\n    \"mediaId\": 1,\r\n    \"score\": 5,\r\n    \"comment\": \"Amazing movie!\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "8 moderator list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/media/moderation?mediaId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"media",
+						"moderation"
+					],
+					"query": [
+						{
+							"key": "mediaId",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/media/moderation?mediaId=1' \\\r\n--header 'Authorization: Bearer {{TOKEN}}'"
+			},
+			"response": []
+		},
+		{
+			"name": "9 approve rating comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ratingId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/ratings/approve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ratings",
+						"approve"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/ratings/approve' \\\r\n--header 'Content-Type: application/json' \\\r\n--header 'Authorization: Bearer {{TOKEN}}' \\\r\n--data '{\r\n    \"ratingId\": 1\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "10 delete rating",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/ratings?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ratings"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location --request DELETE 'http://localhost:8080/api/ratings?id=1' \\\r\n--header 'Authorization: Bearer {{TOKEN}}'"
+			},
+			"response": []
+		},
+		{
+			"name": "11 add favorite",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mediaId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/media/favorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"media",
+						"favorite"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/media/favorite' \\\r\n--header 'Content-Type: application/json' \\\r\n--header 'Authorization: Bearer {{TOKEN}}' \\\r\n--data '{\r\n    \"mediaId\": 1\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "12 get recommendations",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/media/recommendations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"media",
+						"recommendations"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/media/recommendations' \\\r\n--header 'Authorization: Bearer {{TOKEN}}'"
+			},
+			"response": []
+		},
+		{
+			"name": "13 get leaderboard",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/leaderboard",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"leaderboard"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8080/api/leaderboard'"
+			},
+			"response": []
+		}
+	]
+}
